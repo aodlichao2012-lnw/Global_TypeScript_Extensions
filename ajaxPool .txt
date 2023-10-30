@@ -1,0 +1,74 @@
+//request-pool.service.ts 
+
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RequestPoolService {
+  private requests: any[] = [];
+
+  add(request: any) {
+    this.requests.push(request);
+  }
+
+  remove(request: any) {
+    const index = this.requests.indexOf(request);
+    if (index !== -1) {
+      this.requests.splice(index, 1);
+    }
+  }
+
+  cancelAll() {
+    this.requests.forEach((request) => {
+      request.unsubscribe(); // ยกเลิกการสมัครสมาชิกของ Observable หรือ Subscription
+    });
+    this.requests = [];
+  }
+}
+
+
+//my-component.component.ts
+
+
+// my-component.component.ts
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { RequestPoolService } from './request-pool.service';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html'
+})
+export class MyComponent implements OnInit {
+  constructor(
+    private http: HttpClient,
+    private requestPoolService: RequestPoolService
+  ) {}
+
+  ngOnInit() {
+    // ตัวอย่างการส่ง HTTP request และเพิ่มลงใน request pool
+    const request = this.http.get('your-api-endpoint').subscribe(
+      (data) => {
+        // ทำอะไรกับข้อมูลที่ได้รับ
+      },
+      (error) => {
+        // ทำอะไรเมื่อเกิดข้อผิดพลาด
+      },
+      () => {
+        // ทำอะไรเมื่อ request เสร็จสิ้น
+        this.requestPoolService.remove(request);
+      }
+    );
+
+    this.requestPoolService.add(request); // เพิ่ม request ลงใน pool
+  }
+
+  cancelAllRequests() {
+    // เรียกใช้เมธอดเพื่อยกเลิกทุก requests ที่ค้างอยู่ใน "pool"
+    this.requestPoolService.cancelAll();
+  }
+}
+
+
