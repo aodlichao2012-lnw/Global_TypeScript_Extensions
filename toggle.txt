@@ -1,0 +1,32 @@
+//styles.css (หรือ styles.scss):
+
+.hidden {
+  display: none;
+}
+
+//app.component.html:
+
+<div [ngClass]="{'hidden': isHidden}">
+  <!-- เนื้อหาที่คุณต้องการแสดง/ซ่อน -->
+</div>
+
+//app.component.ts:
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html',
+  styleUrls: ['./my-component.component.css']
+})
+export class MyComponent {
+  isHidden = true;
+
+  toggle() {
+    this.isHidden = !this.isHidden;
+  }
+}
+
+//app.component.html:
+
+<button (click)="toggle()">Toggle Element</button>

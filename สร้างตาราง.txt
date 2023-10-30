@@ -1,0 +1,33 @@
+//app.component.html:
+
+<table class="your-table-class">
+  <thead>
+    <tr>
+      <th *ngFor="let header of headers">{{ header }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of values">
+      <td *ngFor="let cell of row">{{ cell }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+//app.component.ts:
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-table',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  @Input() headers: string[];
+  @Input() values: string[][];
+}
+
+//app.component.html:
+
+<app-table [headers]="headers" [values]="values"></app-table>

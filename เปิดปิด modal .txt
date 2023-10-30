@@ -1,0 +1,38 @@
+#เปิดปิด modal 
+//html
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <!-- ส่วนเนื้อหาของ Modal อยู่ที่นี่ -->
+    <span (click)="close()" class="close">&times;</span>
+  </div>
+</div>
+
+//app.component.ts:
+import { Component, ViewChild } from '@angular/core';
+import { ModalComponent } from './modal.component';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  @ViewChild(ModalComponent) modal: ModalComponent;
+  showModal = false;
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+}
+
+//app.component.html:
+
+<button (click)="openModal()">Open Modal</button>
+<app-modal [showModal]="showModal" (closeModal)="closeModal()"></app-modal>
+
+
+
+

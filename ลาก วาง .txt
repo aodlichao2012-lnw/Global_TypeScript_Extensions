@@ -1,0 +1,87 @@
+//app.component.html:
+
+<div
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  class="drop-area"
+>
+  Drag and Drop files here
+</div>
+<input
+  type="file"
+  (change)="onFileSelected($event)"
+  class="file-input"
+/>
+
+//styles.css (หรือ styles.scss):
+
+.drop-area {
+  border: 2px dashed #cccccc;
+  padding: 20px;
+}
+
+.highlight {
+  background-color: #f0f0f0;
+}
+
+//app.component.ts:
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html',
+  styleUrls: ['./my-component.component.css']
+})
+export class MyComponent {
+  onDragOver(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    // เพิ่ม CSS class เพื่อเน้น drop area
+    event.target.classList.add('highlight');
+  }
+
+  onDragLeave(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    // ลบ CSS class เพื่อยกเลิกการเน้น drop area
+    event.target.classList.remove('highlight');
+  }
+
+  onDrop(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    // ลบ CSS class เพื่อยกเลิกการเน้น drop area
+    event.target.classList.remove('highlight');
+    const files = (event as DragEvent).dataTransfer.files;
+    // เรียกใช้ฟังก์ชันที่จะอัปโหลดไฟล์
+    this.uploadFiles(files);
+  }
+
+  onFileSelected(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    // เรียกใช้ฟังก์ชันที่จะอัปโหลดไฟล์
+    this.uploadFiles(files);
+  }
+
+  uploadFiles(files: FileList) {
+    // ทำงานกับไฟล์ที่ถูกเลือกหรือลากและวางที่นี่
+  }
+}
+
+//app.component.html:
+
+<div
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  class="drop-area"
+>
+  Drag and Drop files here
+</div>
+<input
+  type="file"
+  (change)="onFileSelected($event)"
+  class="file-input"
+/>

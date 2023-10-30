@@ -1,0 +1,22 @@
+//app.module.ts
+
+import { RouterModule } from '@angular/router';
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  // ...
+})
+export class AppModule { }
+
+//component
+
+import { Router } from '@angular/router';
+
+constructor(private router: Router) { }
+
+openLinkInNewTab(link: string) {
+  window.open(link, '_blank');
+}
+
+//html
+<button (click)="openLinkInNewTab('https://example.com')">Open Link in New Tab</button>
