@@ -1,0 +1,94 @@
+// module.ts
+
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [
+    // ...
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule, // เพิ่ม HttpClientModule ที่นี่
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+//http.service.ts
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HttpService {
+  constructor(private http: HttpClient) {}
+
+  // ส่ง HTTP request ด้วย FormData
+  sendFormData(url: string, formData: FormData) {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'undefined'); // ตั้งค่า Content-Type ให้เป็น undefined สำหรับ FormData
+
+    return this.http.post(url, formData, { headers, responseType: 'text' });
+  }
+}
+
+// my-component.component.ts
+
+import { Component } from '@angular/core';
+import { HttpService } from './http.service';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html'
+})
+export class MyComponent {
+  constructor(private httpService: HttpService) {}
+
+  onFormSubmit(formData: FormData) {
+    const url = 'your-api-endpoint'; // แทนที่ด้วย URL ของ API ที่คุณต้องการเรียกใช้
+
+    this.httpService.sendFormData(url, formData).subscribe(
+      (response) => {
+        // ทำอะไรกับข้อมูลที่ได้รับ
+      },
+      (error) => {
+        // ทำอะไรเมื่อเกิดข้อผิดพลาด
+      }
+    );
+  }
+}
+
+//my-component.component.html
+
+<form (submit)="onFormSubmit(formData)">
+  <input type="file" (change)="handleFileInput($event)" />
+  <!-- เพิ่ม input fields อื่น ๆ ที่คุณต้องการ -->
+  <button type="submit">ส่ง</button>
+</form>
+
+// my-component.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html'
+})
+export class MyComponent {
+  formData: FormData = new FormData();
+
+  constructor() {}
+
+  handleFileInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const files = inputElement.files;
+
+    if (files && files.length > 0) {
+      // เพิ่มไฟล์ลงใน FormData object
+      this.formData.append('fileToUpload', files[0]);
+    }
+  }
+}
+
