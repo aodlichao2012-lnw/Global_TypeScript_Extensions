@@ -1,0 +1,99 @@
+//app.component.html:
+
+<div
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  class="drop-area"
+>
+  Drag and Drop files here
+</div>
+<img
+  [src]="imagePreview"
+  alt="Image Preview"
+  class="image-preview"
+/>
+
+//app.component.ts:
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html',
+  styleUrls: ['./my-component.component.css']
+})
+export class MyComponent {
+  imagePreview: string = ''; // รูปภาพตัวอย่าง
+  constructor() {}
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    // เพิ่ม CSS class เพื่อเน้น drop area
+    event.dataTransfer.dropEffect = 'copy';
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    // ลบ CSS class เพื่อยกเลิกการเน้น drop area
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    // ลบ CSS class เพื่อยกเลิกการเน้น drop area
+    const files = event.dataTransfer.files;
+    // เรียกใช้ฟังก์ชันที่จะอัปโหลดไฟล์
+    this.uploadFiles(files);
+  }
+
+  onFileSelected(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    // เรียกใช้ฟังก์ชันที่จะอัปโหลดไฟล์
+    this.uploadFiles(files);
+  }
+
+  uploadFiles(files: FileList) {
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        // ตรวจสอบว่าไฟล์เป็นรูปภาพหรือไม่
+        if (file.type.indexOf('image') === 0) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            // แสดงรูปภาพใน element รูปภาพ
+            this.imagePreview = e.target.result as string;
+          };
+          reader.readAsDataURL(file); // อ่านไฟล์เป็น Data URL
+          // ทำสิ่งที่คุณต้องการกับไฟล์ที่ถูกอัปโหลด
+          // ส่งไปยังเซิร์ฟเวอร์ เป็นตัวอย่าง
+          this.uploadToServer(file);
+        } else {
+          alert('ไฟล์ไม่ใช่รูปภาพ');
+        }
+      }
+    }
+  }
+
+  uploadToServer(file: File) {
+    // ทำสิ่งที่คุณต้องการเพื่ออัปโหลดไฟล์ไปยังเซิร์ฟเวอร์
+  }
+}
+
+//app.component.html:
+
+<div
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  class="drop-area"
+>
+  Drag and Drop files here
+</div>
+<img
+  [src]="imagePreview"
+  alt="Image Preview"
+  class="image-preview"
+/>
