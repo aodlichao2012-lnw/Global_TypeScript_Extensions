@@ -1,0 +1,40 @@
+
+การ Binding ใน Angular เป็นกระบวนการเชื่อมโยงข้อมูลระหว่าง HTML และ TypeScript โดย Angular จะใช้ binding เพื่อแสดงข้อมูลใน HTML จาก TypeScript หรือเพื่อรับค่าจาก HTML ไปประมวลผลใน TypeScript
+
+การ Binding ใน Angular มี 2 ประเภทหลักๆ ดังนี้
+
+Property binding เป็นการใช้ binding เพื่อเชื่อมโยงข้อมูลระหว่าง property ของ HTML และตัวแปรใน TypeScript
+Event binding เป็นการใช้ binding เพื่อเชื่อมโยงเหตุการณ์ที่เกิดขึ้นใน HTML กับฟังก์ชันใน TypeScript
+Property binding
+
+Property binding ใช้สัญลักษณ์ {{ }} เพื่อเชื่อมโยงข้อมูลระหว่าง property ของ HTML และตัวแปรใน TypeScript โดย Angular จะอัปเดตค่าของ property ใน HTML ให้ตรงกับค่าของตัวแปรใน TypeScript เมื่อค่าของตัวแปรใน TypeScript เปลี่ยนแปลง
+
+ตัวอย่างการ Property binding มีดังนี้
+
+<h1>{{name}}</h1>
+
+โค้ดด้านบนจะแสดงผลชื่อของผู้ใช้ที่เก็บไว้ในตัวแปรชื่อ name ใน TypeScript
+
+// ประกาศตัวแปรชื่อ name ชนิดข้อมูล string
+let name: string;
+
+// กำหนดค่าให้กับตัวแปร name
+name = "John Doe";
+
+เมื่อรันโค้ดด้านบน ผลลัพธ์ที่ได้จะเป็นดังนี้
+
+John Doe
+
+Event binding
+
+Event binding ใช้สัญลักษณ์ () => {} เพื่อเชื่อมโยงเหตุการณ์ที่เกิดขึ้นใน HTML กับฟังก์ชันใน TypeScript โดย Angular จะเรียกฟังก์ชันใน TypeScript เมื่อเหตุการณ์ที่เกิดขึ้นใน HTML เกิดขึ้น
+
+ตัวอย่างการ Event binding มีดังนี้
+
+<button (click)="onButtonClick()">Click me</button>
+
+// ประกาศฟังก์ชันชื่อ onButtonClick()
+function onButtonClick() {
+  // แสดงข้อความแจ้งว่าปุ่มถูกคลิก
+  console.log("Button clicked!");
+}

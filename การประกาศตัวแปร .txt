@@ -1,0 +1,92 @@
+
+การประกาศตัวแปรใน Angular จะใช้ syntax เช่นเดียวกับ TypeScript โดยตัวแปรใน Angular จะต้องกำหนดชนิดข้อมูล (data type) เสมอ เพื่อให้ compiler ตรวจสอบความถูกต้องของโค้ดได้
+
+รูปแบบการประกาศตัวแปรใน Angular มีดังนี้
+
+// ประกาศตัวแปรชื่อ name ชนิดข้อมูล string
+let name: string;
+
+// ประกาศตัวแปรชื่อ age ชนิดข้อมูล number
+let age: number;
+
+// ประกาศตัวแปรชื่อ jobs ชนิดข้อมูล Array<string>
+let jobs: string[];
+
+
+การประกาศตัวแปรใน Angular จะใช้ syntax เช่นเดียวกับ TypeScript โดยตัวแปรใน Angular จะต้องกำหนดชนิดข้อมูล (data type) เสมอ เพื่อให้ compiler ตรวจสอบความถูกต้องของโค้ดได้
+
+รูปแบบการประกาศตัวแปรใน Angular มีดังนี้
+
+TypeScript
+// ประกาศตัวแปรชื่อ name ชนิดข้อมูล string
+let name: string;
+
+// ประกาศตัวแปรชื่อ age ชนิดข้อมูล number
+let age: number;
+
+// ประกาศตัวแปรชื่อ jobs ชนิดข้อมูล Array<string>
+let jobs: string[];
+
+
+ตัวอย่างการใช้งานตัวแปรใน Angular มีดังนี้
+
+// กำหนดค่าเริ่มต้นให้กับตัวแปร name
+name = "John Doe";
+
+// กำหนดค่าให้กับตัวแปร age
+age = 30;
+
+// กำหนดค่าให้กับตัวแปร jobs
+jobs = ["Apple", "Dell", "HP"];
+
+
+
+การประกาศตัวแปรใน Angular จะใช้ syntax เช่นเดียวกับ TypeScript โดยตัวแปรใน Angular จะต้องกำหนดชนิดข้อมูล (data type) เสมอ เพื่อให้ compiler ตรวจสอบความถูกต้องของโค้ดได้
+
+รูปแบบการประกาศตัวแปรใน Angular มีดังนี้
+
+TypeScript
+// ประกาศตัวแปรชื่อ name ชนิดข้อมูล string
+let name: string;
+
+// ประกาศตัวแปรชื่อ age ชนิดข้อมูล number
+let age: number;
+
+// ประกาศตัวแปรชื่อ jobs ชนิดข้อมูล Array<string>
+let jobs: string[];
+โปรดใช้โค้ดด้วยความระมัดระวัง ดูข้อมูลเพิ่มเติม
+ตัวอย่างการใช้งานตัวแปรใน Angular มีดังนี้
+
+TypeScript
+// กำหนดค่าเริ่มต้นให้กับตัวแปร name
+name = "John Doe";
+
+// กำหนดค่าให้กับตัวแปร age
+age = 30;
+
+// กำหนดค่าให้กับตัวแปร jobs
+jobs = ["Apple", "Dell", "HP"];
+
+
+นอกจากนี้ ตัวแปรใน Angular ยังสามารถประกาศและกำหนดค่าได้ในคราวเดียวกัน โดยใช้ syntax ดังนี้
+
+// ประกาศและกำหนดค่าให้กับตัวแปร name
+let name = "John Doe";
+
+// ประกาศและกำหนดค่าให้กับตัวแปร age
+let age = 30;
+
+// ประกาศและกำหนดค่าให้กับตัวแปร jobs
+let jobs = ["Apple", "Dell", "HP"];
+
+ตัวอย่างการใช้งานตัวแปรใน Angular ร่วมกับ HTML มีดังนี้
+
+<h1>{{name}}</h1>
+
+<p>{{age}}</p>
+
+<ul>
+  <li *ngFor="let job of jobs">
+    {{job}}
+  </li>
+</ul>

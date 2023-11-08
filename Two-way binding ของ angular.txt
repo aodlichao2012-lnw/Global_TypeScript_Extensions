@@ -1,0 +1,20 @@
+
+Two-way binding เป็นรูปแบบการ Binding ของ Angular ที่อนุญาตให้ข้อมูลใน HTML และ TypeScript แลกเปลี่ยนกันได้ กล่าวคือ เมื่อค่าของตัวแปรใน TypeScript เปลี่ยนแปลง ค่าของ property ใน HTML ก็จะเปลี่ยนแปลงตามไปด้วย และในทางกลับกัน เมื่อค่าของ property ใน HTML เปลี่ยนแปลง ค่าของตัวแปรใน TypeScript ก็จะเปลี่ยนแปลงตามไปด้วย
+
+การ Two-way binding ใช้สัญลักษณ์ [()]= เพื่อเชื่อมโยงข้อมูลระหว่าง property ของ HTML และตัวแปรใน TypeScript
+
+ตัวอย่างการ Two-way binding มีดังนี้
+
+<input type="text" [(ngModel)]="name">
+
+โค้ดด้านบนจะเชื่อมโยง property value ของ input element กับตัวแปรชื่อ name ใน TypeScript
+
+let name: string;
+
+เมื่อผู้ใช้ป้อนข้อความลงใน input element ค่าของตัวแปร name ก็จะเปลี่ยนแปลงตามไปด้วย และในทางกลับกัน เมื่อค่าของตัวแปร name เปลี่ยนแปลง ค่าของ property value ของ input element ก็จะเปลี่ยนแปลงตามไปด้วย
+
+นอกจากนี้ Angular ยังมี directive ชื่อ ngModel ที่สามารถใช้แทนสัญลักษณ์ [()]= เพื่อแสดงผลและรับค่าจาก input element ได้
+
+ตัวอย่างการใช้ directive ngModel มีดังนี้
+
+<input type="text" [ngModel]="name">
