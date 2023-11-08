@@ -19,8 +19,11 @@ export class AppComponent  implements OnInit  {
 
   }
   test1(){
-    this.values = this.elementRef.nativeElement.querySelector('[data-input="1"]').value
+    this.values = this.elementRef.nativeElement.querySelector('[data-input]').value
     alert(this.values)
+    for(const item of this.values){
+      alert(item.valueOf())
+    }
   }
   test2(){
 
