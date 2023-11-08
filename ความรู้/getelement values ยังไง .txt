@@ -1,0 +1,94 @@
+
+มีสองวิธีในการรับค่าขององค์ประกอบ HTML ใน Angular:
+
+- ใช้ property binding
+- ใช้ elementRef
+
+
+การใช้ property binding
+
+Property binding ช่วยให้คุณสามารถผูกมัดค่าของคุณสมบัติของ
+ส่วนประกอบกับค่าขององค์ประกอบ 
+HTML ได้
+
+รูปแบบการใช้ property binding มีดังนี้:
+
+<input type="text" [(ngModel)]="name">
+
+โค้ดด้านบนจะผูกมัดค่าของคุณสมบัติ name ของส่วนประกอบกับค่าของอินพุตแบบฟอร์ม
+
+เมื่อผู้ใช้ป้อนข้อความลงในอินพุตแบบฟอร์ม ค่าของอินพุตแบบฟอร์มจะถูกผูกมัดกับคุณสมบัติ 
+name ของส่วนประกอบ
+
+คุณสามารถใช้ property binding เพื่อรับค่าขององค์ประกอบ HTML
+ ได้โดยผูกมัดคุณสมบัติของส่วนประกอบกับค่าขององค์ประกอบ HTML
+
+ตัวอย่างเช่น:
+
+<div>{{title}}</div>
+
+โค้ดด้านบนจะผูกมัดค่าของคุณสมบัติ title ของส่วนประกอบกับค่าขององค์ประกอบ <div>
+เมื่อคุณเรียกใช้ getter ของคุณสมบัติ title ค่าขององค์ประกอบ <div> จะถูกส่งคืน
+
+การใช้ elementRef
+elementRef 
+ช่วยให้คุณสามารถเข้าถึงองค์ประกอบ
+ HTML โดยตรงจากโค้ด TypeScript
+รูปแบบการใช้ elementRef มีดังนี้:
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  title: string;
+
+  constructor(private elementRef: ElementRef) {}
+
+  ngOnInit() {
+    // Get the value of the title element
+    this.title = this.elementRef.nativeElement.textContent;
+  }
+
+}
+
+
+โค้ดด้านบนจะสร้างส่วนประกอบที่มีชื่อ "Hello, world!"
+ เมื่อส่วนประกอบถูกสร้างขึ้นครั้งแรก คุณสมบัติ title จะตั้งค่าเป็น "Hello, world!"
+
+ฟังก์ชัน ngOnInit() จะรับค่าขององค์ประกอบ <div>
+ ที่มีชื่อ "title" และตั้งค่าให้กับคุณสมบัติ title
+
+คุณสามารถใช้ elementRef เพื่อเข้าถึงองค์ประกอบ HTML ใดๆ ใน DOM
+
+ตัวอย่างเช่น:
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  constructor(private elementRef: ElementRef) {}
+
+  ngOnInit() {
+    // Get the value of the input element
+    const inputElement = this.elementRef.nativeElement.querySelector('input');
+    const value = inputElement.value;
+
+    // Do something with the value
+  }
+
+}
+
+โค้ดด้านบนจะรับค่าของอินพุตแบบฟอร์มและแสดงผลบนคอนโซล
+
+การใช้ elementRef ช่วยให้คุณสามารถเข้าถึงองค์ประกอบ HTML
+ โดยตรงจากโค้ด TypeScript ช่วยให้คุณสามารถเขียนโค้ดที่มีประสิทธิภาพมากขึ้นได้
