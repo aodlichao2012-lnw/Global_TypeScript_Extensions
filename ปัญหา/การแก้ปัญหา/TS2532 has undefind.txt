@@ -1,0 +1,19 @@
+ข้อความข้อผิดพลาด TS2532 เกิดขึ้นเมื่อ 
+TypeScript สงสัยว่า elementRef อาจเป็น 
+undefined. เพื่อแก้ไขปัญหานี้, คุณควรตรวจสอบก่อนว่า
+elementRef ไม่เป็น undefined ก่อนที่คุณจะเรียก nativeElement.querySelector.
+
+คุณสามารถทำได้โดยใช้การตรวจสอบค่าของ elementRef
+ก่อนที่จะใช้ได้ดังนี้:
+
+if (this.elementRef) {
+  this.values = this.elementRef.
+  nativeElement.querySelector('[data-input="1"]');
+}
+
+นี้จะทำให้ TypeScript
+ รู้ว่าคุณกำลังตรวจสอบค่าก่อนการใช้งาน
+ และจะไม่แสดงข้อความข้อผิดพลาด
+  TS2532 อีกต่อไป. แต่ต้องระวังในการใช้งาน
+   elementRef ในระหว่างรันทางเว็บว่ามันไม่เป็น 
+   undefined จริง ๆ ไม่เช่นนั้นคุณอาจเจอข้อผิดพลาดในรันไทม์.

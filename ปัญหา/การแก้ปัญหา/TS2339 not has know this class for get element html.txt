@@ -1,0 +1,29 @@
+ข้อความข้อผิดพลาด TS2339 เกิดขึ้นเมื่อ TypeScript ไม่รู้จัก 
+elementRef ซึ่งดูเหมือนว่าคุณกำลังใช้เพื่อเข้าถึง DOM
+ element ใน Angular โดยไม่ได้ประกาศ elementRef ในคลาส AppComponent.
+
+เพื่อแก้ปัญหานี้, คุณควรที่จะเพิ่ม elementRef
+ ในคลาส AppComponent และประกาศให้ TypeScript
+  รู้จักมัน โดยใช้ @ViewChild decorator หรือโดยอื่น ๆ 
+  ในกรณีนี้เราจะใช้ @ViewChild decorator:
+
+- Import ElementRef จาก @angular/core:
+
+import { Component, ElementRef, ViewChild } from '@angular/core';
+
+- ใช้ @ViewChild decorator เพื่อประกาศ elementRef ในคลาส AppComponent:
+
+export class AppComponent {
+  @ViewChild('myInput') elementRef: ElementRef;
+  
+  // ... โค้ดอื่น ๆ ...
+}
+
+- ใน HTML template ของคุณ, ให้เพิ่ม #myInput บน element ที่คุณต้องการเข้าถึง:
+
+<input #myInput type="text" data-input="1" (change)="test2();"/>
+
+ตอนนี้ TypeScript จะรู้จัก elementRef และคุณสามารถใช้
+ this.elementRef.nativeElement เพื่อเข้าถึง DOM element
+  ที่มี #myInput. คลาส AppComponent ของคุณควรไม่มีข้อผิดพลาด
+   TS2339 อีกต่อไป.

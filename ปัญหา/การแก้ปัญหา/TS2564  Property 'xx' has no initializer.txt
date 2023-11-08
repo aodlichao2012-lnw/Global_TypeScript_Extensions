@@ -1,0 +1,15 @@
+ข้อความข้อผิดพลาด TS2564 เกิดขึ้นเมื่อ TypeScript ต้องการให้คุณให้ค่าเริ่มต้น
+ (initializer) ให้กับ elementRef ในคอนสตรักเตอร์ แต่ในกรณีนี้
+  elementRef จะถูกกำหนดค่าโดย @ViewChild decorator 
+  และไม่จำเป็นต้องมีค่าเริ่มต้น. คุณสามารถแก้ไขปัญหานี้โดยการเพิ่ม 
+! หลังประกาศตัวแปรเพื่อบอก TypeScript ว่าตัวแปรนี้จะมีค่าในภายหลังโดยแน่นอน:
+
+@ViewChild('myInput') elementRef!: ElementRef;
+
+หรือหากคุณใช้ TypeScript เวอร์ชันที่ไม่รองรับ non-null assertion operator (!)
+ คุณสามารถเพิ่มค่าเริ่มต้นในคอนสตรักเตอร์ โดยใช้ undefined:
+
+ @ViewChild('myInput') elementRef: ElementRef | undefined;
+
+ ข้อความข้อผิดพลาด TS2564 ควรจะถูกแก้ไขด้วยวิธีด้านบน 
+ และตอนนี้คุณไม่ควรเจอข้อผิดพลาด TS2564 อีกต่อไปในคลาส AppComponent.

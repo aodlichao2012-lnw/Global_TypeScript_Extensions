@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component , OnInit , ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,21 +6,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent  implements OnInit  {
+
+  constructor(private elementRef: ElementRef) {}
 
   title = 'test';
   arary: string[] = [];
-  ngOnInit() :void{
-    this.arary.push("ssss","3333333","666666")
-  }
-  test1 (){
-    alert("55555")
-  }
-  ngOnChanges() :void{
+  values: string = "";
+  ngOnInit() {
+    // Get the value of the title element
+    // this.title = this.elementRef.nativeElement.textContent;
 
-
+  }
+  test1(){
+    this.values = this.elementRef.nativeElement.querySelector('[data-input="1"]').value
+    alert(this.values)
   }
   test2(){
-    alert("88888888")
+
   }
 }

@@ -1,0 +1,14 @@
+ข้อความข้อผิดพลาด TS2552 เกิดขึ้นเมื่อ TypeScript ไม่รู้จัก ElementRef
+ และเสนอคำแนะนำให้คุณอาจจะหมายถึง 'Element' ซึ่งไม่ใช่ที่เราต้องการในกรณีนี้.
+
+เราสามารถแก้ไขปัญหานี้ได้โดยเพิ่มการนำเข้าของ ElementRef จาก @angular/core ดังนี้:
+
+import { Component, ElementRef, ViewChild } from '@angular/core';
+
+แน่ใจว่าคุณได้ทำการนำเข้า ElementRef 
+และไม่มีการนำเข้า Element ซึ่งเป็นคำสำคัญใน
+ DOM API และไม่ได้เกี่ยวข้องกับ ElementRef 
+ ใน Angular. เมื่อคุณทำการนำเข้า ElementRef 
+ อย่างถูกต้อง, TypeScript ควรจะรู้จัก ElementRef 
+ และคุณจะสามารถใช้ @ViewChild decorator ในคลาส AppComponent
+ ได้โดยไม่มีข้อผิดพลาด TS2552.

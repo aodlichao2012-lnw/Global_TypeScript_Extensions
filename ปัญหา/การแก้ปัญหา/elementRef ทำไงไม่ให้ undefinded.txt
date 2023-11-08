@@ -1,0 +1,45 @@
+การป้องกัน elementRef ไม่ให้เป็น undefined
+ อาจเกิดจากหลายสาเหตุ. นี่คือวิธีที่คุณสามารถจัดการกับปัญหานี้:
+
+ ใช้ *ngIf ใน HTML Template:
+  คุณสามารถใช้ *ngIf เพื่อเรียก 
+  elementRef ในรายการ DOM 
+  เมื่อมันพร้อมใช้งาน แต่ถ้ามันยังไม่พร้อม, 
+  Angular จะไม่ render ส่วนนั้น. นี่คือตัวอย่าง:
+
+  <input #myInput *ngIf="elementRef" type="text" data-input="1" (change)="test2();"/>
+
+  ในส่วน TypeScript, คุณไม่จำเป็นต้องตรวจสอบ elementRef แล้ว ถ้ามันไม่ใช่ undefined.
+
+  ใช้ Safe Navigation Operator 
+  (?.): คุณสามารถใช้ Safe Navigation
+   Operator (?.) เพื่อเรียก nativeElement
+ดยป้องกันข้อผิดพลาดเมื่อ elementRef เป็น undefined. นี่คือตัวอย่าง:
+
+this.values =
+this.elementRef?.nativeElement.
+querySelector('[data-input="1"]');
+
+ในกรณีนี้, ถ้า elementRef ไม่เป็น undefined,
+ค่า this.values จะถูกกำหนดเป็นผลลัพธ์ของ 
+querySelector ในที่นั้น, แต่ถ้า elementRef
+เป็น undefined, this.values จะเป็น undefined ด้วย.
+
+ใช้ ViewChild ใน ngAfterViewInit:
+ในกรณีที่คุณต้องการให้แน่ใจว่า elementRef
+ถูกกำหนดให้แน่ๆ ก่อนที่คุณจะใช้งาน, คุณสามารถใช้ 
+ngAfterViewInit lifecycle hook เพื่อรอให้ Angular
+ตั้งค่า elementRef ให้กับคุณ และคุณจะรู้ว่ามันไม่ใช่ undefined ในช่วงนี้:
+
+import { AfterViewInit } from '@angular/core';
+
+export class AppComponent implements AfterViewInit {
+  @ViewChild('myInput') elementRef: ElementRef;
+
+  ngAfterViewInit() {
+    // ตรวจสอบว่า elementRef ไม่เป็น undefined
+    if (this.elementRef) {
+      this.values = this.elementRef.nativeElement.querySelector('[data-input="1"]');
+    }
+  }
+}
