@@ -1,0 +1,74 @@
+
+วิธีสร้างฟังก์ชันใน Angular มีดังนี้
+
+ประกาศฟังก์ชันในคลาสส่วนประกอบ (component class)
+
+export class AppComponent {
+
+  // ประกาศฟังก์ชันชื่อ add()
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+}
+
+เรียกใช้ฟังก์ชันในโค้ด HTML
+
+<p>{{add(10, 20)}}</p>
+
+โค้ดด้านบนจะแสดงผลลัพธ์ของฟังก์ชัน add() บนหน้าจอ
+
+เรียกใช้ฟังก์ชันในโค้ด TypeScript
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+  // ประกาศฟังก์ชันชื่อ add()
+  add(a: number, b: number): number {
+    return a + b;
+  }
+
+  ngOnInit() {
+    // เรียกใช้ฟังก์ชัน add() ในโค้ด TypeScript
+    const result = this.add(10, 20);
+    // แสดงผลลัพธ์ของฟังก์ชัน add()
+    console.log(result);
+  }
+
+}
+
+โค้ดด้านบนจะแสดงผลลัพธ์ของฟังก์ชัน add() บนคอนโซล
+
+ฟังก์ชันใน Angular มีคุณสมบัติดังต่อไปนี้:
+
+ฟังก์ชันสามารถประกาศในคลาสส่วนประกอบ (component class) หรือในคลาสบริการ (service class)
+ฟังก์ชันสามารถรับพารามิเตอร์ได้
+ฟังก์ชันสามารถส่งคืนค่าได้
+ฟังก์ชันสามารถเรียกใช้จากโค้ด HTML หรือโค้ด TypeScript
+ตัวอย่างฟังก์ชันใน Angular มีดังนี้:
+
+// ฟังก์ชันที่รับพารามิเตอร์สองตัวและส่งคืนค่า
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+// ฟังก์ชันที่ไม่มีการพารามิเตอร์และส่งคืนค่า
+function getMessage(): string {
+  return "Hello, world!";
+}
+
+// ฟังก์ชันที่รับพารามิเตอร์และไม่มีค่าส่งคืน
+function logMessage(message: string) {
+  console.log(message);
+}
+
+ฟังก์ชัน add() รับพารามิเตอร์สองตัวคือ a และ b และส่งคืนค่าของ
+ a + b ฟังก์ชัน getMessage() ไม่มีพารามิเตอร์และส่งคืนค่า
+  "Hello, world!" ฟังก์ชัน logMessage() รับพารามิเตอร์หนึ่งตัวคือ
+   message และไม่มีค่าส่งคืน ฟังก์ชันเหล่านี้สามารถเรียกใช้จากโค้ด HTML หรือโค้ด TypeScript

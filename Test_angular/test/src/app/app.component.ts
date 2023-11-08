@@ -13,4 +13,7 @@ export class AppComponent {
   ngOnInit(){
     this.arary.push("ssss","3333333","666666") 
   }
+  test1 (){
+
+  }
 }
