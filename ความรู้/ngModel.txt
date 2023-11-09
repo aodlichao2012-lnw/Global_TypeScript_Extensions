@@ -1,0 +1,199 @@
+ngModel คืออะไร ใช้งานในฝั่ง typescript อย่างไร
+
+
+1
+
+2
+ngModel เป็น directive ใน Angular
+ ที่ใช้สำหรับผูกมัดค่าของอินพุตแบบฟอร์มกับคุณสมบัติของส่วนประกอบ
+
+รูปแบบการใช้ ngModel มีดังนี้:
+
+<input type="text" [(ngModel)]="name">
+
+โค้ดด้านบนจะผูกมัดค่าของอินพุตแบบฟอร์มกับคุณสมบัติ name
+ ของส่วนประกอบ
+
+เมื่อผู้ใช้ป้อนข้อความลงในอินพุตแบบฟอร์ม ค่าของอินพุตแบบฟอร์มจะถูกผูกมัดกับคุณสมบัติ 
+name ของส่วนประกอบ
+
+ในฝั่ง TypeScript คุณสามารถเข้าถึงคุณสมบัติ ngModel ขององค์ประกอบ
+ HTML โดยใช้คำสั่ง @ViewChild
+
+ตัวอย่างเช่น:
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  name: string;
+
+  constructor() {}
+
+  ngOnInit() {
+    // Get the ngModel of the input element
+    const inputElement = this.elementRef.nativeElement.querySelector('input');
+    const ngModel = inputElement.nativeElement.ngModel;
+
+    // Do something with the ngModel
+    ngModel.value = 'John Doe';
+  }
+
+}
+
+
+ngModel เป็น directive ใน Angular ที่ใช้สำหรับผูกมัดค่าของอินพุตแบบฟอร์มกับคุณสมบัติของส่วนประกอบ
+
+รูปแบบการใช้ ngModel มีดังนี้:
+
+HTML
+<input type="text" [(ngModel)]="name">
+โปรดใช้โค้ดด้วยความระมัดระวัง ดูข้อมูลเพิ่มเติม
+โค้ดด้านบนจะผูกมัดค่าของอินพุตแบบฟอร์มกับคุณสมบัติ name ของส่วนประกอบ
+
+เมื่อผู้ใช้ป้อนข้อความลงในอินพุตแบบฟอร์ม ค่าของอินพุตแบบฟอร์มจะถูกผูกมัดกับคุณสมบัติ name ของส่วนประกอบ
+
+ในฝั่ง TypeScript คุณสามารถเข้าถึงคุณสมบัติ ngModel ขององค์ประกอบ HTML โดยใช้คำสั่ง @ViewChild
+
+ตัวอย่างเช่น:
+
+TypeScript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  name: string;
+
+  constructor() {}
+
+  ngOnInit() {
+    // Get the ngModel of the input element
+    const inputElement = this.elementRef.nativeElement.querySelector('input');
+    const ngModel = inputElement.nativeElement.ngModel;
+
+    // Do something with the ngModel
+    ngModel.value = 'John Doe';
+  }
+
+}
+โปรดใช้โค้ดด้วยความระมัดระวัง ดูข้อมูลเพิ่มเติม
+โค้ดด้านบนจะสร้างส่วนประกอบที่มีอินพุตแบบฟอร์ม
+
+ฟังก์ชัน ngOnInit() จะเข้าถึงคุณสมบัติ ngModel ของอินพุตแบบฟอร์มและตั้งค่าค่าเป็น "John Doe"
+
+คุณสามารถใช้คุณสมบัติ ngModel เพื่อดำเนินการต่างๆ กับอินพุตแบบฟอร์ม ตัวอย่างเช่น:
+
+ตรวจสอบค่าของอินพุตแบบฟอร์ม
+เปลี่ยนค่าของอินพุตแบบฟอร์ม
+ฟังก์ชันการเปลี่ยนแปลงของอินพุตแบบฟอร์ม
+ตัวอย่างการใช้งาน ngModel อื่นๆ มีดังนี้:
+
+ตรวจสอบว่าอินพุตแบบฟอร์มมีค่าหรือไม่
+
+const ngModel = inputElement.nativeElement.ngModel;
+if (ngModel.value) {
+  // Do something
+}
+
+เปลี่ยนค่าของอินพุตแบบฟอร์ม
+
+ngModel.value = 'New value';
+
+ฟังก์ชันการเปลี่ยนแปลงของอินพุตแบบฟอร์ม
+
+ngModel.valueChanges.subscribe(value => {
+  // Do something when the value of the input element changes
+});
+
+การใช้ ngModel
+ ช่วยให้คุณสามารถผูกมัดค่าของอินพุตแบบฟอร์มกับคุณสมบัติของส่วนประกอบได้อย่างง่ายดาย 
+ ช่วยให้คุณสามารถเขียนโค้ดที่มีประสิทธิภาพมากขึ้น
+
+
+
+จะเรียกใช้ [(ngModel)]=""  หลายๆ input แต่ต่าง element ได้อย่างไร
+
+คุณสามารถเรียกใช้ [(ngModel)]="" หลายๆ input แต่ต่าง element ได้โดยการใช้คำสั่ง @ViewChildren
+
+คำสั่ง @ViewChildren ช่วยให้คุณสามารถเข้าถึงองค์ประกอบ HTML หลายรายการในฝั่ง TypeScript ได้
+
+ตัวอย่างเช่น:
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  name: string;
+  age: number;
+
+  constructor() {}
+
+  ngOnInit() {
+    // Get the inputs
+    const inputs = this.viewChildren('input');
+
+    // Bind the inputs to the properties
+    inputs.forEach(input => {
+      input.valueChanges.subscribe(value => {
+        if (input.name === 'name') {
+          this.name = value;
+        } else if (input.name === 'age') {
+          this.age = value;
+        }
+      });
+    });
+  }
+
+}
+
+โค้ดด้านบนจะสร้างส่วนประกอบที่มีอินพุตแบบฟอร์มสองรายการ
+
+ฟังก์ชัน ngOnInit()
+ จะเข้าถึงองค์ประกอบอินพุตทั้งสองรายการโดยใช้คำสั่ง @ViewChildren
+
+จากนั้นฟังก์ชัน ngOnInit() 
+จะผูกมัดค่าของอินพุตแบบฟอร์มแต่ละรายการกับคุณสมบัติของส่วนประกอบ
+
+ในตัวอย่างนี้ อินพุตแบบฟอร์มที่มีชื่อ "name"
+ จะผูกมัดกับคุณสมบัติ name ของส่วนประกอบ 
+ และอินพุตแบบฟอร์มที่มีชื่อ "age" จะผูกมัดกับคุณสมบัติ age ของส่วนประกอบ
+
+คุณสามารถใช้คำสั่ง @ViewChildren เพื่อเข้าถึงองค์ประกอบ
+HTML หลายรายการในฝั่ง TypeScript ช่วยให้คุณสามารถเขียนโค้ดที่มีประสิทธิภาพมากขึ้น
+
+ตัวอย่างการใช้งานคำสั่ง @ViewChildren อื่นๆ มีดังนี้:
+
+ตรวจสอบว่าองค์ประกอบ HTML มีอยู่หรือไม่
+
+const inputs = this.viewChildren('input');
+if (inputs.length > 0) {
+  // Do something
+}
+
+เลือกองค์ประกอบ HTML เฉพาะ
+
+const input = this.viewChildren('input').filter(input => input.name === 'name')[0];
+
+ฟังก์ชันการเปลี่ยนแปลงขององค์ประกอบ HTML
+
+const input = this.viewChildren('input')[0];
+input.valueChanges.subscribe(value => {
+  // Do something when the value of the input element changes
+});
+
+
