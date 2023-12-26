@@ -1,0 +1,14 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { YourComponentName } from './path-to-your-component/your-component-name.component';
+
+const routes: Routes = [
+  { path: 'your-path', component: YourComponentName },
+  // เพิ่ม route อื่นๆ ตรงนี้ตามต้องการ
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

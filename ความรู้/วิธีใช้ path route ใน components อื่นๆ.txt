@@ -1,0 +1,5 @@
+<!-- เปลี่ยนไปที่หน้า home -->
+<a routerLink="/home">Home</a>
+
+<!-- เปลี่ยนไปที่หน้า about -->
+<a routerLink="/about">About</a>
